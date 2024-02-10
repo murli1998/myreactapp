@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-  const [text, setText] = useState("My new text is here......");
+  const [text, setText] = useState("");
   //  setText("god morning"); correct way to change text
   const handleUpClick = () => {
     console.log("Uppercase button was clicked");
@@ -22,10 +22,10 @@ export default function TextForm(props) {
   return (
     <>
       <div className="container">
-        <h1>{props.heading}</h1>
+        <h2>{props.heading}</h2>
         <div className="mb-3">
           <textarea
-            className="form-control"
+            className="form-control border-secondary"
             id="myBox"
             rows="8"
             value={text}
@@ -40,7 +40,7 @@ export default function TextForm(props) {
         </div>
       </div>
       <div className="container">
-        <h1>Your Text Summary : </h1>
+        <h2>Your Text Summary : </h2>
         <p>
           {text.split(" ").length} Words and {text.length} Characters
         </p>
@@ -48,7 +48,7 @@ export default function TextForm(props) {
           Time to read : {0.008 * text.split(" ").length.toFixed(3)} minutes.
         </p>
 
-        <h2>Text Preview</h2>
+        <h2>Preview</h2>
         <p>{text}</p>
       </div>
     </>
