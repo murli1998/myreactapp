@@ -4,7 +4,7 @@ export default function TextForm(props) {
   const [text, setText] = useState("");
   //  setText("god morning"); correct way to change text
   const handleUpClick = () => {
-    if (text == "") {
+    if (text === "") {
       let checkmsg = new SpeechSynthesisUtterance("Please enter some text");
       speechSynthesis.speak(checkmsg);
     } else {
@@ -18,7 +18,7 @@ export default function TextForm(props) {
     }
   };
   const handleLwClick = () => {
-    if (text == "") {
+    if (text === "") {
       let checkmsg = new SpeechSynthesisUtterance("Please enter some text");
       speechSynthesis.speak(checkmsg);
     } else {
@@ -38,19 +38,38 @@ export default function TextForm(props) {
   };
 
   const textTospeech = () => {
-    if (text == "") {
+    if (text === "") {
       let checkmsg = new SpeechSynthesisUtterance("Please enter some text");
       speechSynthesis.speak(checkmsg);
     } else {
       let msg = new SpeechSynthesisUtterance();
       msg.text = text;
-      msg.lang = "en - IN";
       window.speechSynthesis.speak(msg);
     }
   };
 
+  const removeExtrraSpace = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+  };
+
+  const copyText = () => {
+    if (text === "") {
+      let checkmsg = new SpeechSynthesisUtterance("There's nothing to copy");
+      speechSynthesis.speak(checkmsg);
+    } else {
+      let text = document.getElementById("myBox");
+      text.select();
+      navigator.clipboard.writeText(text.value);
+      let checkmsg = new SpeechSynthesisUtterance(
+        "Text copied, you can paste it whereever you want"
+      );
+      speechSynthesis.speak(checkmsg);
+    }
+  };
+
   const handleClearClick = () => {
-    if (text == "") {
+    if (text === "") {
       let checkmsg = new SpeechSynthesisUtterance("There's nothing to clear");
       speechSynthesis.speak(checkmsg);
     } else {
@@ -82,15 +101,30 @@ export default function TextForm(props) {
 
           <button
             type="submit"
-            onClick={textTospeech}
+            onClick={removeExtrraSpace}
             className="btn btn-warning mx-2 my-2"
+          >
+            Remove Extra Space
+          </button>
+
+          <button
+            type="submit"
+            onClick={copyText}
+            className="btn btn-warning mx-2 my-2"
+          >
+            Copy Text
+          </button>
+          <button
+            type="submit"
+            onClick={textTospeech}
+            className="btn btn-info mx-2 my-2"
           >
             Speak
           </button>
           <button
             type="submit"
             onClick={handleClearClick}
-            className="btn btn-warning mx-2 my-2"
+            className="btn btn-danger mx-2 my-2"
           >
             Clear
           </button>
