@@ -82,7 +82,10 @@ export default function TextForm(props) {
 
   return (
     <>
-      <div className="container mt-4">
+      <div
+        className="container mt-4"
+        style={{ color: props.mode === "dark" ? "white" : "black" }}
+      >
         <h2>{props.heading}</h2>
         <div className="mb-3">
           <textarea
@@ -91,6 +94,10 @@ export default function TextForm(props) {
             rows="8"
             value={text}
             onChange={handleOnChange}
+            style={{
+              backgroundColor: props.mode === "dark" ? "#5e6166" : "white",
+              color: props.mode === "dark" ? "white" : "black",
+            }}
           ></textarea>
           <button className="btn btn-primary m-3" onClick={handleUpClick}>
             Convert to Uppercase
@@ -130,8 +137,13 @@ export default function TextForm(props) {
           </button>
         </div>
       </div>
-      <div className="container ">
-        <h4 className="text-secondary">Your Text Summary : </h4>
+      <div
+        className="container "
+        style={{ color: props.mode === "dark" ? "#b6babf" : "#6d6f73" }}
+      >
+        <h4 style={{ color: props.mode === "dark" ? "#cbcfd4" : "#6d6f73" }}>
+          Your Text Summary :{" "}
+        </h4>
         <p>
           {text.split(" ").length - 1} Words and {text.length} Characters
         </p>
@@ -139,8 +151,14 @@ export default function TextForm(props) {
           Time to read : {(0.008 * text.split(" ").length).toFixed(3)} minutes.
         </p>
 
-        <h4 className="text-secondary">Preview</h4>
-        <p>{text}</p>
+        <h4 style={{ color: props.mode === "dark" ? "#cbcfd4" : "#6d6f73" }}>
+          Preview
+        </h4>
+        <p>
+          {text.length > 0
+            ? text
+            : "Enter some text above to preview it here...."}
+        </p>
       </div>
     </>
   );
