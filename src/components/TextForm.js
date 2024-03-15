@@ -6,6 +6,7 @@ export default function TextForm(props) {
   const handleUpClick = () => {
     if (text === "") {
       let checkmsg = new SpeechSynthesisUtterance("Please enter some text");
+
       speechSynthesis.speak(checkmsg);
     } else {
       console.log("Uppercase button was clicked");
@@ -15,6 +16,7 @@ export default function TextForm(props) {
         "Text converted to uppercase"
       );
       speechSynthesis.speak(checkmsg);
+      props.showAlert("Text converted to uppercase", "success");
     }
   };
   const handleLwClick = () => {
@@ -29,6 +31,7 @@ export default function TextForm(props) {
         "Text converted to lowercase"
       );
       speechSynthesis.speak(checkmsg);
+      props.showAlert("Text converted to lowercase", "success");
     }
   };
 
@@ -51,6 +54,9 @@ export default function TextForm(props) {
   const removeExtrraSpace = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.showAlert("Extra spaces removed", "success");
+    let checkmsg = new SpeechSynthesisUtterance("Extra spaces removed");
+    speechSynthesis.speak(checkmsg);
   };
 
   const copyText = () => {
@@ -65,6 +71,7 @@ export default function TextForm(props) {
         "Text copied, you can paste it whereever you want"
       );
       speechSynthesis.speak(checkmsg);
+      props.showAlert("Text copied", "success");
     }
   };
 
@@ -77,6 +84,7 @@ export default function TextForm(props) {
       setText(newText);
       let checkmsg = new SpeechSynthesisUtterance("All cleared");
       speechSynthesis.speak(checkmsg);
+      props.showAlert("All cleared", "success");
     }
   };
 
@@ -145,7 +153,8 @@ export default function TextForm(props) {
           Your Text Summary :{" "}
         </h4>
         <p>
-          {text.split(" ").length - 1} Words and {text.length} Characters
+          {text === "" ? 0 : text.trim().split(/\s+/).length} Words and{" "}
+          {text.trim().length} Characters
         </p>
         <p>
           Time to read : {(0.008 * text.split(" ").length).toFixed(3)} minutes.

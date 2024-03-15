@@ -4,19 +4,38 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import React, { useState } from "react";
+import Alert from "./components/Alert";
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+  };
+
   const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#36383b";
       document.getElementById("displayModeSwitch").innerHTML =
         "Disable Dark Mode";
+      showAlert("Dark Mode Enabled", "success");
+      let checkmsg = new SpeechSynthesisUtterance("Dark Mode Enabled");
+      speechSynthesis.speak(checkmsg);
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
       document.getElementById("displayModeSwitch").innerHTML =
         "Enable Dark Mode";
+      showAlert("Light Mode Enabled", "success");
+      let checkmsg = new SpeechSynthesisUtterance("Light Mode Enabled");
+      speechSynthesis.speak(checkmsg);
     }
   };
   const [mode, setMode] = useState("light");
@@ -28,10 +47,12 @@ function App() {
         mode={mode}
         toggleMode={toggleMode}
       />
+      <Alert alert={alert} />
       <div className="container" my-3="true">
         <TextForm
           heading="Enter the text to analyse below"
           mode={mode}
+          showAlert={showAlert}
         ></TextForm>
       </div>
       {/* <About /> */}
