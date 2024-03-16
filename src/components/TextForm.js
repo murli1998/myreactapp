@@ -157,7 +157,9 @@ export default function TextForm(props) {
           {text.trim().length} Characters
         </p>
         <p>
-          Time to read : {(0.008 * text.split(" ").length).toFixed(3)} minutes.
+          Time to read :{" "}
+          {text === "" ? 0 : (0.008 * text.trim().split(" ").length).toFixed(3)}{" "}
+          minutes.
         </p>
 
         <h4 style={{ color: props.mode === "dark" ? "#cbcfd4" : "#6d6f73" }}>
