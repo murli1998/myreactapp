@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function TextForm(props) {
   const [text, setText] = useState("");
-  //  setText("god morning"); correct way to change text
+  //  setText("good morning"); correct way to change text
   const handleUpClick = () => {
     if (text === "") {
       let checkmsg = new SpeechSynthesisUtterance("Please enter some text");
@@ -103,7 +103,7 @@ export default function TextForm(props) {
             value={text}
             onChange={handleOnChange}
             style={{
-              backgroundColor: props.mode === "dark" ? "#5e6166" : "white",
+              backgroundColor: props.mode === "dark" ? "#5e6166" : "#f5f4f2",
               color: props.mode === "dark" ? "white" : "black",
             }}
           ></textarea>
@@ -125,7 +125,7 @@ export default function TextForm(props) {
           <button
             type="submit"
             onClick={copyText}
-            className="btn btn-warning mx-2 my-2"
+            className="btn btn-secondary mx-2 my-2"
           >
             Copy Text
           </button>
