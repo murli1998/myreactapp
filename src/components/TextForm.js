@@ -110,14 +110,14 @@ export default function TextForm(props) {
           <button
             className="btn btn-primary mx-2 my-2"
             onClick={handleUpClick}
-            disabled={text.length < 1}
+            disabled={text.trim().length < 1}
           >
             Convert to Uppercase
           </button>
           <button
             className="btn btn-success mx-2 my-2"
             onClick={handleLwClick}
-            disabled={text.length < 1}
+            disabled={text.trim().length < 1}
           >
             Convert to Lowercase
           </button>
@@ -126,7 +126,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={removeExtrraSpace}
             className="btn btn-warning mx-2 my-2"
-            disabled={text.length < 1}
+            disabled={text.trim().length < 1}
           >
             Remove Extra Space
           </button>
@@ -135,7 +135,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={copyText}
             className="btn btn-secondary mx-2 my-2"
-            disabled={text.length < 1}
+            disabled={text.trim().length < 1}
           >
             Copy Text
           </button>
@@ -143,7 +143,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={textTospeech}
             className="btn btn-info mx-2 my-2"
-            disabled={text.length < 1}
+            disabled={text.trim().length < 1}
           >
             Speak
           </button>
@@ -151,7 +151,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={handleClearClick}
             className="btn btn-danger mx-2 my-2"
-            disabled={text.length < 1}
+            disabled={text.trim().length < 1}
           >
             Clear
           </button>
@@ -165,12 +165,21 @@ export default function TextForm(props) {
           Your Text Summary :{" "}
         </h4>
         <p>
-          {text === "" ? 0 : text.trim().split(/\s+/).length} Words and{" "}
-          {text.trim().length} Characters
+          {
+            text.split(/\s+/).filter((Element) => {
+              return Element.length !== 0;
+            }).length
+          }{" "}
+          Words and {text.trim().length} Characters
         </p>
         <p>
           Time to read :{" "}
-          {text === "" ? 0 : (0.008 * text.trim().split(" ").length).toFixed(3)}{" "}
+          {(
+            0.008 *
+            text.split(" ").filter((Element) => {
+              return Element.length !== 0;
+            }).length
+          ).toFixed(3)}{" "}
           minutes.
         </p>
 
@@ -178,7 +187,9 @@ export default function TextForm(props) {
           Preview
         </h4>
         <p>
-          {text.length > 0
+          {text.split(" ").filter((Element) => {
+            return Element.length !== 0;
+          }).length > 0
             ? text
             : "Enter some text above to preview it here...."}
         </p>
