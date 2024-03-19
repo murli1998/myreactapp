@@ -51,7 +51,7 @@ export default function TextForm(props) {
     }
   };
 
-  const removeExtrraSpace = () => {
+  const removeExtraSpace = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
     props.showAlert("Extra spaces removed", "success");
@@ -124,7 +124,7 @@ export default function TextForm(props) {
 
           <button
             type="submit"
-            onClick={removeExtrraSpace}
+            onClick={removeExtraSpace}
             className="btn btn-warning mx-2 my-2"
             disabled={text.trim().length < 1}
           >

@@ -44,7 +44,7 @@ function App() {
     <>
       <Router>
         <Navbar
-          title="TextUtils"
+          title="Textify"
           aboutText="About"
           mode={mode}
           toggleMode={toggleMode}
