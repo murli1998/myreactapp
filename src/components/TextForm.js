@@ -107,10 +107,18 @@ export default function TextForm(props) {
               color: props.mode === "dark" ? "white" : "black",
             }}
           ></textarea>
-          <button className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>
+          <button
+            className="btn btn-primary mx-2 my-2"
+            onClick={handleUpClick}
+            disabled={text.length < 1}
+          >
             Convert to Uppercase
           </button>
-          <button className="btn btn-success mx-2 my-2" onClick={handleLwClick}>
+          <button
+            className="btn btn-success mx-2 my-2"
+            onClick={handleLwClick}
+            disabled={text.length < 1}
+          >
             Convert to Lowercase
           </button>
 
@@ -118,6 +126,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={removeExtrraSpace}
             className="btn btn-warning mx-2 my-2"
+            disabled={text.length < 1}
           >
             Remove Extra Space
           </button>
@@ -126,6 +135,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={copyText}
             className="btn btn-secondary mx-2 my-2"
+            disabled={text.length < 1}
           >
             Copy Text
           </button>
@@ -133,6 +143,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={textTospeech}
             className="btn btn-info mx-2 my-2"
+            disabled={text.length < 1}
           >
             Speak
           </button>
@@ -140,6 +151,7 @@ export default function TextForm(props) {
             type="submit"
             onClick={handleClearClick}
             className="btn btn-danger mx-2 my-2"
+            disabled={text.length < 1}
           >
             Clear
           </button>
