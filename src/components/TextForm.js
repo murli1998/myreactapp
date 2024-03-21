@@ -64,9 +64,7 @@ export default function TextForm(props) {
       let checkmsg = new SpeechSynthesisUtterance("There's nothing to copy");
       speechSynthesis.speak(checkmsg);
     } else {
-      let text = document.getElementById("myBox");
-      text.select();
-      navigator.clipboard.writeText(text.value);
+      navigator.clipboard.writeText(text);
       let checkmsg = new SpeechSynthesisUtterance(
         "Text copied, you can paste it whereever you want"
       );
